@@ -1,0 +1,6 @@
+---
+- name: Installing basic RH SSO
+  hosts: all
+
+  roles:
+    - rh-sso

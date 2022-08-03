@@ -1,0 +1,6 @@
+---
+- name: service | Starting and enabling service
+  service:
+    name: rh-sso7
+    state: started
+    enabled: true

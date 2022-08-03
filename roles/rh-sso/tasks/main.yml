@@ -1,0 +1,12 @@
+---
+- name: "{{ role_prefix }} | Installing prerequisites"
+  include_tasks: install_prerequisites.yml
+
+- name: "{{ role_prefix}} | Installing RH SSO"
+  include_tasks: install_rh_sso.yml
+
+- name: "{{ role_prefix }} | RH SSO as a service"
+  include_tasks: setup_service.yml
+
+- name: "{{ role_prefix }} | Post Configurations"
+  include_tasks: post_configurations.yml
