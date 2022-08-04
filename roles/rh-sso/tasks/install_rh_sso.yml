@@ -1,8 +1,7 @@
 ---
 - name: rhsso | JRH-SSO 7.4 Repository
   community.general.rhsm_repository:
-    name:
-      - rh-sso-7.4-for-rhel-8-x86_64-rpms
+    name: rh-sso-7.4-for-rhel-8-x86_64-rpms
 
 - name: rhsso | Installing package
   ansible.builtin.yum:
