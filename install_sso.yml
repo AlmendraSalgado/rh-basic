@@ -1,6 +1,8 @@
 ---
 - name: Installing basic RH SSO
   hosts: all
+  collections:
+    - community.general
 
   roles:
     - rh-sso

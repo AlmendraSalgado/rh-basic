@@ -5,6 +5,6 @@
       - rh-sso-7.4-for-rhel-8-x86_64-rpms
 
 - name: rhsso | Installing package
-  yum:
+  ansible.builtin.yum:
     name: "@rh-sso7"
     state: present
