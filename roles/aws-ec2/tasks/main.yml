@@ -1,4 +1,6 @@
 ---
+- debug:
+    var: aws_secret_access_key
 - block:
     - include_tasks: create_sg.yml
 
