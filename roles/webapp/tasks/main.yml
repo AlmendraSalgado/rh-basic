@@ -1,0 +1,24 @@
+---
+- name: install httpd
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+
+- name: copy template index.html
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+
+- name: start and enable httpd
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+
+- ansible.builtin.uri:
+    url: "http://{{ ansible_fqdn }}"
+    return_content: true
+  register: output
+
+- debug:
+    var: output.content

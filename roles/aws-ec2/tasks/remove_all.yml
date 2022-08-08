@@ -1,0 +1,34 @@
+---
+- name: remove ec2
+  amazon.aws.ec2_instance:
+#    key_name: "{{ ec2_key }}"
+#    instance_type: "{{ ec2_instance_type }}"
+#    image_id: "{{ ec2_ami_id }}"
+#    wait: yes
+    state: absent
+    name: "{{ tag_name }}"
+    exact_count: "{{ ec2_instance_count }}"
+    tags:
+      name: "{{ tag_name }}"
+    #network:
+    #  assign_public_ip: true
+    region: "{{ aws_region }}"
+    #security_group: "{{ fact_ec2_security_group_id }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+
+- name: remove ec2 key pair
+  amazon.aws.ec2_key:
+    name: "{{ ec2_key }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    state: absent
+
+- name: remove security group
+  amazon.aws.ec2_group:
+    name: "{{ security_group_name }}"
+    state: absent
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"

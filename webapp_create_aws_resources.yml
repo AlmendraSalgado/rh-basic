@@ -1,0 +1,20 @@
+---
+- name: Deploying AWS instances to serve a webapp
+  hosts: localhost
+  vars_files:
+    - aws_access_key.yml
+
+  tasks:
+    - ansible.builtin.include_role:
+        name: aws-ec2
+      vars:
+        aws_access_key: "{{ aws_access_key_id }}"
+        aws_secret_key: "{{ aws_secret_access_key }}"
+        aws_region: us-west-1
+        ec2_key: webservers_key
+        ec2_instance_type: t2.micro
+        ec2_ami_id: "ami-0186e3fec9b0283ee"
+        ec2_instance_count: 2
+        security_group_name: webserver-sg
+        tag_name: webserver
+        state: create

@@ -1,0 +1,18 @@
+---
+- name: provision ec2 on aws
+  amazon.aws.ec2_instance:
+    key_name: "{{ ec2_key }}"
+    instance_type: "{{ ec2_instance_type }}"
+    image_id: "{{ ec2_ami_id }}"
+    wait: true
+    name: "{{ tag_name }}"
+    exact_count: "{{ ec2_instance_count }}"
+    tags:
+      name: "{{ tag_name }}"
+    #network:
+    #  assign_public_ip: true
+    region: "{{ aws_region }}"
+    security_group: "{{ fact_ec2_security_group_id }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+  register: ec2

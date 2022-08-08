@@ -1,0 +1,12 @@
+---
+- block:
+    - include_tasks: create_sg.yml
+
+    - include_tasks: create_ssh_key.yml
+
+    - include_tasks: create_ec2.yml
+  when: 'state == "create"'
+
+- block:
+    - include_tasks: remove_all.yml
+  when: 'state == "remove"'

@@ -1,0 +1,45 @@
+---
+- amazon.aws.ec2_vpc_net_info:
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+  register: vpc_info
+
+- name: Set vpc id fact
+  ansible.builtin.set_fact:
+     fact_ec2_vpc_subnet_id: "{{ vpc_info.vpcs[0].vpc_id }}"
+
+- debug:
+    var: fact_ec2_vpc_subnet_id
+
+- name: setting up security group
+  amazon.aws.ec2_group:
+    name: "{{ security_group_name }}"
+    description: "webservers network sg"
+    vpc_id: "{{ fact_ec2_vpc_subnet_id }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    rules:
+      - proto: tcp  # ssh
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp  # http
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp  # https
+        from_port: 443
+        to_port: 443
+        cidr_ip: 0.0.0.0/0
+    rules_egress:
+      - proto: all
+        cidr_ip: 0.0.0.0/0
+  register: sg_info
+
+- set_fact:
+    fact_ec2_security_group_id: "{{ sg_info.group_id }}"
+
+- debug:
+    var: fact_ec2_security_group_id

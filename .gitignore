@@ -1,0 +1,4 @@
+ansible.cfg
+.vault-secret
+ec2.*
+.ssh
