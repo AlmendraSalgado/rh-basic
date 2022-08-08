@@ -5,6 +5,9 @@
     - aws_access_key.yml
 
   tasks:
+    - debug:
+        var: aws_access_key_id
+        
     - ansible.builtin.include_role:
         name: aws-ec2
       # vars:
