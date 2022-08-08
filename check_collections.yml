@@ -1,9 +1,0 @@
----
-- name: Check collections path
-  hosts: all
-
-  tasks:
-    - command: ansible-galaxy collection list
-
-    - debug:
-        msg: ANSIBLE_COLLECTIONS_PATH
