@@ -13,6 +13,6 @@
     #  assign_public_ip: true
     region: "{{ aws_region }}"
     security_group: "{{ fact_ec2_security_group_id }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
+    # aws_access_key: "{{ aws_access_key }}"
+    # aws_secret_key: "{{ aws_secret_key }}"
   register: ec2

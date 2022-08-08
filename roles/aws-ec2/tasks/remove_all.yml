@@ -14,15 +14,15 @@
     #  assign_public_ip: true
     region: "{{ aws_region }}"
     #security_group: "{{ fact_ec2_security_group_id }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
+    # aws_access_key: "{{ aws_access_key }}"
+    # aws_secret_key: "{{ aws_secret_key }}"
 
 - name: remove ec2 key pair
   amazon.aws.ec2_key:
     name: "{{ ec2_key }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
+    # aws_access_key: "{{ aws_access_key }}"
+    # aws_secret_key: "{{ aws_secret_key }}"
     state: absent
 
 - name: remove security group
@@ -30,5 +30,5 @@
     name: "{{ security_group_name }}"
     state: absent
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
+    # aws_access_key: "{{ aws_access_key }}"
+    # aws_secret_key: "{{ aws_secret_key }}"

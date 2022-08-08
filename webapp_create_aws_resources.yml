@@ -1,8 +1,8 @@
 ---
 - name: Deploying AWS instances to serve a webapp
   hosts: all
-  vars_files:
-    - aws_access_key.yml
+  # vars_files:
+    # - aws_access_key.yml
 
   tasks:
     - ansible.builtin.include_role:

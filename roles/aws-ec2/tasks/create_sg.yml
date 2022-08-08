@@ -1,8 +1,8 @@
 ---
 - amazon.aws.ec2_vpc_net_info:
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
+    # aws_access_key: "{{ aws_access_key }}"
+    # aws_secret_key: "{{ aws_secret_key }}"
   register: vpc_info
 
 - name: Set vpc id fact
@@ -18,8 +18,8 @@
     description: "webservers network sg"
     vpc_id: "{{ fact_ec2_vpc_subnet_id }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
+    # aws_access_key: "{{ aws_access_key }}"
+    # aws_secret_key: "{{ aws_secret_key }}"
     rules:
       - proto: tcp  # ssh
         from_port: 22
