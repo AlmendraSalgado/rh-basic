@@ -1,7 +1,7 @@
 ---
   - name: Setting up web application on AWS EC2 instances
-    hosts: tag_Name_webserver
-    remote_user: ec2-user
+    hosts: all
+    # remote_user: ec2-user
     #become: true
     vars_files:
       - aws_access_key.yml
@@ -14,7 +14,6 @@
 
       - ansible.builtin.include_role:
           name: aws-elb
-        vars:
-          aws_access_key: "{{ aws_access_key_id }}"
-          aws_secret_key: "{{ aws_secret_access_key }}"
-          aws_region: us-west-1
+        # vars:
+          # aws_access_key: "{{ aws_access_key_id }}"
+          # aws_secret_key: "{{ aws_secret_access_key }}"
