@@ -9,7 +9,7 @@
   ansible.builtin.set_fact:
      fact_ec2_vpc_subnet_id: "{{ vpc_info.vpcs[0].vpc_id }}"
 
-- debug:
+- ansible.builtin.debug:
     var: fact_ec2_vpc_subnet_id
 
 - name: setting up security group
@@ -38,8 +38,8 @@
         cidr_ip: 0.0.0.0/0
   register: sg_info
 
-- set_fact:
+- ansible.builtin.set_fact:
     fact_ec2_security_group_id: "{{ sg_info.group_id }}"
 
-- debug:
+- ansible.builtin.debug:
     var: fact_ec2_security_group_id
