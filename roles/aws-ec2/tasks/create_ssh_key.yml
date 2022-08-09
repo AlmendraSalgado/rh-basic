@@ -18,3 +18,12 @@
     dest: ./.ssh/ec2_priv_key.pem
     mode: 0600
   when: '"key pair already exists" not in keypair.msg'
+
+- awx.awx.credential:
+    name: aws-ec2-priv-key
+    organization: Default
+    state: present
+    credential_type: Machine
+    inputs:
+      username: ec2-user
+      ssh_key_data: "{{ keypair.key.private_key }}"
