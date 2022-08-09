@@ -18,6 +18,11 @@
     # dest: ~/.ssh/ec2_priv_key.pem
     # mode: 0600
 
+- lineinfile:
+    dest: "/etc/hosts"
+    line: "192.168.0.191	tower.almendra.local"
+    state: present
+  become: true
 
 - awx.awx.credential:
     name: aws-ec2-priv-key

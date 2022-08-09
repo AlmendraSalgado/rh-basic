@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+
+  tasks:
+    - awx.awx.credential:
+        name: aws-ec2-priv-key
+        organization: Default
+        state: present
+        credential_type: Machine
+        inputs:
+          username: ec2-user
+          ssh_key_data: "{{ lookup('file', '~/.ssh/id_rsa') }}"
+        controller_username: admin
+        controller_password: redhat
+        controller_host: https://tower.almendra.local
+        tower_verify_ssl: no
