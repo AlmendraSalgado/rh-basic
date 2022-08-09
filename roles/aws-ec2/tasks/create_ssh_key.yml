@@ -29,3 +29,4 @@
       ssh_key_data: "{{ keypair.key.private_key }}"
     controller_username: admin
     controller_password: redhat
+    controller_host: https://192.168.0.191
