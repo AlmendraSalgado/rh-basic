@@ -29,5 +29,5 @@
       ssh_key_data: "{{ keypair.key.private_key }}"
     controller_username: admin
     controller_password: redhat
-    controller_host: https://tower.almendra.local
+    controller_host: http://tower.almendra.local
     validate_certs: no
