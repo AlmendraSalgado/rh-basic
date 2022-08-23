@@ -1,19 +1,25 @@
 ---
-  - name: Setting up web application on AWS EC2 instances
-    hosts: all
-    # remote_user: ec2-user
-    #become: true
-    # vars_files:
-      # - aws_access_key.yml
+- name: Setting up web application on AWS EC2 instances
+  hosts: all
 
-    tasks:
-      - ansible.builtin.include_role:
-          name: webapp
-          apply:
-            become: true
+  tasks:
+    - name: install httpd
+      ansible.builtin.yum:
+        name: httpd
+        state: present
 
-      - ansible.builtin.include_role:
-          name: aws-elb
-        # vars:
-          # aws_access_key: "{{ aws_access_key_id }}"
-          # aws_secret_key: "{{ aws_secret_access_key }}"
+    - name: copy template index.html
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+
+    - name: start and enable httpd
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - ansible.builtin.uri:
+        url: "http://{{ ansible_fqdn }}"
+        return_content: true
+      register: output

@@ -1,0 +1,31 @@
+---
+- name: Create Load Balancer and register EC2 instances
+  hosts: all
+
+  tasks:
+    - amazon.aws.ec2_metadata_facts:
+
+    - name: setup a simple load balancer
+      ec2_elb_lb:
+        name: "{{ elb_name }}"
+        state: present
+        region: "{{ aws_region }}"
+        zones:
+          - "{{ aws_region }}a"
+        listeners:
+          - protocol: http
+            load_balancer_port: 80
+            instance_port: 80
+      register: aws_elb
+      delegate_to: localhost
+      run_once: true
+
+    - name: add the webservers to the load balancer
+      local_action: ec2_elb
+      args:
+        instance_id: "{{ ansible_ec2_instance_id }}"
+        ec2_elbs: "{{ elb_name }}"
+        state: present
+        region: "{{ aws_region }}"
+        wait_timeout: 600
+      delegate_to: localhost
