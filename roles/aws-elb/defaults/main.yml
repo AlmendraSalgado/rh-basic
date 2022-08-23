@@ -1,4 +1,0 @@
----
-aws_region: us-west-1
-
-elb_name: webapp-lb
